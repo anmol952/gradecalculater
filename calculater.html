@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ...existing CSS... */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(102,166,255,0.15);
+            text-align: center;
+            min-width: 320px;
+            transition: box-shadow 0.3s;
+        }
+        .calculator:hover {
+            box-shadow: 0 12px 40px rgba(102,166,255,0.25);
+        }
+        h2 {
+            margin-bottom: 25px;
+            color: #0078d7;
+            letter-spacing: 1px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-group i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0078d7;
+            font-size: 18px;
+        }
+        input[type="number"] {
+            padding: 10px 10px 10px 38px;
+            width: 180px;
+            font-size: 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="number"]:focus {
+            border-color: #66a6ff;
+        }
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            background: linear-gradient(90deg, #66a6ff 0%, #0078d7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(102,166,255,0.12);
+            transition: background 0.2s, transform 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #0078d7 0%, #66a6ff 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #0078d7;
+            min-height: 28px;
+            transition: color 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Grade Calculator</h2>
+        <div class="input-group">
+            <i class="fa-solid fa-pen"></i>
+            <input type="number" id="scoreInput" placeholder="Enter your score" min="0" max="100">
+        </div>
+        <button id="calcBtn">Calculate Grade</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script src="grad.js"></script>
+    <script>
+        document.getElementById('calcBtn').addEventListener('click', function() {
+            const score = parseInt(document.getElementById('scoreInput').value, 10);
+            const resultDiv = document.getElementById('result');
+            if (isNaN(score) || score < 0 || score > 100) {
+                resultDiv.textContent = "Please enter a valid score between 0 and 100.";
+                resultDiv.style.color = "red";
+            } else {
+                const grade = calculateGrade(score);
+                resultDiv.textContent = `Your grade is: ${grade}`;
+                resultDiv.style.color = "#0078d7";
+            }
+        });
+    </script>
